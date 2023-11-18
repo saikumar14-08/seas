@@ -1,0 +1,118 @@
+<html lang="en">
+<head>
+<title>Phishing tool</title>
+<link rel="stylesheet" type="text/css" href="https://hide-techno-tips.github.io/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<header>
+<div id = "header"></div><br />
+<script src="https://apis.google.com/js/platform.js"></script>
+<div class="g-ytsubscribe" data-channelid="UCy3fBVKd0RMY05CgiiuGqSA" data-layout="" data-count="default"></div>
+</header>
+<script>
+fetch("../header.txt").then(function(response) {
+    	response.text().then(function(text) {
+    		document.getElementById("header").innerHTML = text;
+    	});
+});
+</script>
+
+<div id = "tabbar" class = "tab" style = "z-index:1"></div>
+<script>
+fetch("../tab.txt").then(function(response) {
+    	response.text().then(function(text) {
+    		document.getElementById("tabbar").innerHTML = text;
+    	});
+});
+</script>
+<script>
+function Menu(icon) {
+	var x = document.getElementById("tabbar");
+	if (x.className === "tab") {
+		x.className += " responsive";
+	} else {
+		x.className = "tab";
+	}
+}
+</script>
+	
+<div class="controls">
+	<span class="buttons">
+		<a href="https://github.com/HiDe-Techno-Tips/seas-for-Windows">
+			<button class="icontext">
+				<img src="../assets/GitHub-Mark-Light-120px-plus.png" width="30px" style="margin-right: 10px;">
+				View Repository in Github
+			</button>
+		</a>
+	</span>
+	<span class="horizontalspace"></span>
+</div>
+<script>
+fetch("https://api.github.com/users/Hide-techno-tips/repos").then(res => res.json()).then((out) => {
+	count = 0;
+	for (let i = 0; ; i++) {
+		if (out[i] == null) {
+			break;
+		}
+		if (out[i].name.toLowerCase() == out[i].owner.login.toLowerCase() || out[i].name.toLowerCase() == out[i].owner.login.toLowerCase() + ".github.io") {
+			continue;
+		}
+		if (out[i].name.toLowerCase() == "seas-for-windows") {
+			document.getElementById("stars").innerHTML = document.getElementById("stars").innerHTML + out[i].stargazers_count.toString();
+			document.getElementById("forks").innerHTML = document.getElementById("forks").innerHTML + out[i].forks.toString();
+		}
+		count++;
+	}
+	document.getElementById("repos").innerHTML = document.getElementById("repos").innerHTML + " <span>" + count + "</span>"
+})
+</script>
+<div class="controls">
+	<span class="buttons">
+		<a href="https://github.com/hide-techno-tips/seas-for-windows/issues"><button>Bugs and Issues</button></a>
+		<a href="https://github.com/HiDe-Techno-Tips/seas-for-Windows/pulls"><button>Pull Requests</button></a>
+	</span>
+	<span class="horizontalspace"></span>
+	<span class="buttons">
+		<a href="https://github.com/hide-techno-tips/seas-for-windows/issues/new"><button>Report a Bug or Issue</button></a>
+		<a href="https://github.com/HiDe-Techno-Tips/seas-for-Windows/compare"><button>Create a Pull Request</button></a>
+	</span>
+</div>
+<script>
+fetch("https://api.github.com/users/Hide-techno-tips/gists").then(res => res.json()).then((out) => {
+	count = 0;
+	divtxt = "";
+	for (let i = 0; ; i++) {
+		if (out[i] == null || Object.keys(out[i].files)[0] == null) {
+			break;
+		}
+		count++;
+	}
+	document.getElementById("gists").innerHTML = document.getElementById("gists").innerHTML + " <span>" + count + "</span>";
+})
+</script>
+
+<div id = "content"></div>
+<script>
+fetch("README.md").then(function(response) {
+    	response.text().then(function(text) {
+    		document.getElementById("content").innerHTML = text;
+    	});
+	
+});
+</script>
+
+<footer>
+<div id = "footer"></div>
+</footer>
+<script>
+fetch("../footer.txt").then(function(response) {
+    	response.text().then(function(text) {
+    		document.getElementById("footer").innerHTML = text;
+    	});
+});
+</script>
+</body>
+</html>

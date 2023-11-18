@@ -1,0 +1,8 @@
+.vs
+.vscode
+php
+results
+jq.exe
+ngrok.exe
+*.zip
+*.txt
